@@ -57,5 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 //////////////////////////////////////////////Route User /////////////////////////////////
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
+        ->name('logout.user');
+//////////////////////////////////////////////Route Admin /////////////////////////////////
+    Route::post('admin/logout', [AdminController::class, 'destroy'])
+        ->name('logout.admin');
 });
