@@ -13,10 +13,11 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
+     * RedirectIfAuthenticated
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('Dashboard.User.auth.signin');
     }
 
     /**
@@ -28,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('dashboard.user', absolute: false));
     }
 
     /**
