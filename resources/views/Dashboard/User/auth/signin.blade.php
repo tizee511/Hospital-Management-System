@@ -128,6 +128,8 @@
         </div>
     <!-- End -->
     </div>
+</div>
+
 <!-- End -->
 </div>
 @endsection

@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="main-header-right">
-            <ul class="nav">
+            {{-- <ul class="nav">
                 <li class="">
                     <div class="dropdown  nav-itemd-none d-md-flex">
                         <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
@@ -31,28 +31,90 @@
                                 <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img
                                         src="{{URL::asset('Dashboard/img/flags/egypt_flag.jpg')}}" alt="img"></span>
                                 <strong
-                                    class="mr-2 ml-2 my-auto">{{-- LaravelLocalization::getCurrentLocaleName() --}}</strong>
+                                    class="mr-2 ml-2 my-auto">{{LaravelLocalization::getCurrentLocaleName()}}</strong>
                             @else
                                 <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img
                                         src="{{URL::asset('Dashboard/img/flags/us_flag.jpg')}}" alt="img"></span>
                                 <strong
-                                    class="mr-2 ml-2 my-auto">{{-- LaravelLocalization::getCurrentLocaleName() --}}</strong>
+                                    class="mr-2 ml-2 my-auto">{{LaravelLocalization::getCurrentLocaleName()}}</strong>
                             @endif
                             <div class="my-auto">
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
-                            {{-- @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) --}}
-                            <a class="dropdown-item" rel="alternate" hreflang="{{-- $localeCode --}}"
-                                href="{{-- LaravelLocalization::getLocalizedURL($localeCode, null, [], true) --}}">
-                                {{-- @if($properties['native'] == "English") --}}
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
+                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                @if($properties['native'] == "English")
                                 <i class="flag-icon flag-icon-us"></i>
-                                {{-- @elseif($properties['native'] == "العربية") --}}
+                                @elseif($properties['native'] == "العربية")
                                 <i class="flag-icon flag-icon-eg"></i>
-                                {{-- @endif --}}
-                                {{-- {{ $properties['native'] }} --}}
+                                @endif
+                                {{ $properties['native'] }}
                             </a>
-                            {{-- @endforeach --}}
+                            @endforeach
+                        </div>
+                    </div>
+                </li>
+            </ul> --}}
+            
+           
+            @php
+                $supportedLocales = config('localizer.supported_locales');
+                $localeNames = [
+                    'en' => 'English',
+                    'ar' => 'العربية',
+                ];
+
+                $currentLocale = App::getLocale();
+                $localeFlags = [
+                    'en' => 'Dashboard/img/flags/us_flag.jpg',
+                    'ar' => 'Dashboard/img/flags/egypt_flag.jpg',
+                ];
+                $routeName = request()->route()->getName();
+                $routeName = preg_replace(
+                    '/^(with_locale\.|without_locale\.)/',
+                    '',
+                    $routeName
+                );
+            @endphp
+
+            <ul class="nav">
+                <li>
+                    <div class="dropdown nav-itemd-none d-md-flex">
+                        <a href="#" class="d-flex nav-item nav-link pl-0 country-flag1"
+                        data-toggle="dropdown" aria-expanded="false">
+                            <span class="avatar country-Flag mr-0 align-self-center bg-transparent">
+                                <img src="{{ URL::asset($localeFlags[$currentLocale] ?? '') }}"
+                                    alt="{{ $localeNames[$currentLocale] ?? $currentLocale }}">
+                            </span>
+                            <strong class="mr-2 ml-2 my-auto">
+                                {{ $localeNames[$currentLocale] ?? $currentLocale }}
+                            </strong>
+                            <div class="my-auto"></div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow">
+                            @foreach ($supportedLocales as $locale)
+                                @if ($locale !== $currentLocale)
+                                    <a class="dropdown-item"
+                                    rel="alternate"
+                                    hreflang="{{ $locale }}"
+                                    href="{{ route(
+                                        'with_locale.' . $routeName,
+                                        array_merge(
+                                            request()->route()->parameters(),
+                                            ['locale' => $locale] ))}}">
+
+                                        @if ($locale === 'en')
+                                            <i class="flag-icon flag-icon-us"></i>
+                                        @elseif ($locale === 'ar')
+                                            <i class="flag-icon flag-icon-eg"></i>
+                                        @endif
+                                        {{ $localeNames[$locale] ?? $locale }}
+                                    </a>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </li>

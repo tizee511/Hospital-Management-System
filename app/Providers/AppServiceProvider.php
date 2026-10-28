@@ -6,9 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
+    public const HOME = '/dashboard/user';
+    public const ADMIN = '/dashboard/admin';
     public function register(): void
     {
         //

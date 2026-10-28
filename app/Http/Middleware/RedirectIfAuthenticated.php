@@ -2,25 +2,22 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\AppServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
+    
+    public function handle(Request $request, Closure $next)
     {
         if (auth('web')->check()) {
-            return redirect()->intended(route('dashboard.user',true));
+            return redirect(AppServiceProvider::HOME);
         }
 
         if (auth('admin')->check()) {
-            return redirect()->intended(route('dashboard.admin',true));
+            return redirect(AppServiceProvider::ADMIN);
         }
         return $next($request);
     }

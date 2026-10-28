@@ -20,9 +20,9 @@ Route::middleware('guest')->group(function () {
     
     //*? /////////////////////////// Route User ///////////////////////////////
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.user');
+    Route::post('login/user', [AuthenticatedSessionController::class, 'store'])->name('login.user');
     //*? /////////////////////////// Route Admin  ///////////////////////////////
-    Route::post('admin/login', [AdminController::class, 'store'])->name('login.admin');
+    Route::post('login/admin', [AdminController::class, 'store'])->name('login.admin');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -55,10 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-//////////////////////////////////////////////Route User /////////////////////////////////
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout.user');
-//////////////////////////////////////////////Route Admin /////////////////////////////////
-    Route::post('admin/logout', [AdminController::class, 'destroy'])
-        ->name('logout.admin');
-});
+    //*===============================[Route User]=====================================================
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.user');
+    });
+    //*=================================================[Route Admin]=====================================================
+        Route::post('logout/admin', [AdminController::class, 'destroy'])->middleware(['auth:admin'])->name('logout.admin');
