@@ -8,13 +8,9 @@ use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
-    /**
-     * Show the form for creating the resource.
-     */
-    public function create()
-    {
-        // abort(404);
+    public function index(){
         $sections = Section::all ();
+        // return $sections;
         return view ('Dashboard.Sections.index', compact ('sections'));
     }
 
@@ -23,9 +19,9 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        // abort(404);
+        // return $request;
         Section::create ([
-            'name' => $request->input ('name'),
+            'name' => $request->nname,
         ]);
 
         session ()->flash ('add');
