@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get ('/dashboard_admin', [DashboardController::class, 'index'])->name ('dashboard_admin');
 Route::localize (function ()
@@ -18,6 +20,16 @@ Route::localize (function ()
         return view ('Dashboard.Admin.dashboard');
     })->middleware (['auth:admin'])->name ('dashboard.admin');
 
+    Route::middleware (['auth:admin'])->group (function ()
+    {
+        //############################# sections route ##########################################
+
+        Route::resource ('Sections', SectionController::class);
+
+        //############################# end sections route ######################################
+
+
+    });
     Route::middleware ('auth')->group (function ()
     {
         Route::get ('/profile', [ProfileController::class, 'edit'])->name ('profile.edit');

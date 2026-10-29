@@ -69,7 +69,7 @@
                 $currentLocale = App::getLocale();
                 $localeFlags = [
                     'en' => 'Dashboard/img/flags/us_flag.jpg',
-                    'ar' => 'Dashboard/img/flags/egypt_flag.jpg',
+                    'ar' => 'Dashboard/img/flags/yemen.jpeg',
                 ];
                 $routeName = request()->route()->getName();
                 $routeName = preg_replace(
