@@ -18,6 +18,11 @@
                     <input type="hidden" name="id" value="{{ $section->id }}">
                     <input type="text" name="name" value="{{ $section->name }}" class="form-control">
                 </div>
+                <div class="modal-body">
+                            <textarea class="form-control form-control_gray" name="description" cols="30"
+                    rows="8" required="">{{ $section->description }}</textarea>
+                    <span class="text-danger"></span>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Dashboard/sections_trans.Close')}}</button>
                     <button type="submit" class="btn btn-primary">{{trans('Dashboard/sections_trans.submit')}}</button>

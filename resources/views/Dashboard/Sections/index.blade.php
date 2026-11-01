@@ -105,7 +105,7 @@
     <!--Internal  Datatable js -->
     <script src="{{URL::asset('Dashboard/js/table-data.js')}}"></script>
     <!--Internal  Notify js -->
-    <script src="{{URL::asset('dashboard/plugins/notify/js/notifIt.js')}}"></script>
-    <script src="{{URL::asset('/plugins/notify/js/notifit-custom.js')}}"></script>
+    <script src="{{URL::asset('Dashboard/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('Dashboard/plugins/notify/js/notifit-custom.js')}}"></script>
 
 @endsection

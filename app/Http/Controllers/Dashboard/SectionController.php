@@ -21,7 +21,8 @@ class SectionController extends Controller
     {
         // return $request;
         Section::create ([
-            'name' => $request->nname,
+            'name' => $request->name,
+            'description'=>$request->description
         ]);
 
         session ()->flash ('add');

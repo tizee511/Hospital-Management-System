@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model implements TranslatableContract
 {
+    use HasFactory;
     use Translatable;
     public $translatedAttributes = ['name', 'description'];
     protected $fillable = ['name', 'description'];
     // 3. To define which attributes needs to be translated
-    use HasFactory;
 }

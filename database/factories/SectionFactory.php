@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SectionFactory extends Factory
 {
-    protected $model = Section::class;
+    // protected $model = Section::class;
     public function definition()
     {
         return [

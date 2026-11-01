@@ -16,11 +16,12 @@ class ImageFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    protected $model = Image::class;
+    // protected $model = Image::class;
     public function definition()
     {
+
         return [
-            'filename'       => $this->faker->randomElement (['1.jpg', '2.jpg', '3.jpg', '4.jpg']),
+            'filename'       => $this->faker->randomElement (['Doctor_1.jpg', 'Doctor_2.jpg', 'Doctor_4.jpg', 'Doctor_4.jpg']),
             'imageable_id'   => Doctor::all ()->random ()->id,
             'imageable_type' => 'App\Models\Doctor',
         ];
