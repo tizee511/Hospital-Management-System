@@ -71,7 +71,7 @@
                                   </td>
                                   <td>{{ $doctor->name }}</td>
                                   <td>{{ $doctor->email }}</td>
-                                  <td>{{ $doctor->section}}</td>
+                                  <td>{{ $doctor->section->name}}</td>
                                   <td>{{ $doctor->phone}}</td>
                                   <td>{{ $doctor->appointments}}</td>
                                   <td>{{ $doctor->price}}</td>
